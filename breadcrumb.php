@@ -1,7 +1,9 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mdiaconita
- * Date: 11/03/2016
- * Time: 11:22
- */
+<div id="breadcrumb-holder" class="tna-breadcrumb">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <?php if (function_exists('dimox_breadcrumbs')) dimox_breadcrumbs(); ?>
+            </div>
+        </div>
+    </div>
+</div>
