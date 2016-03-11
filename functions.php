@@ -1,4 +1,8 @@
 <?php
+/**
+---------------------------------------------------------------
+---------------------------------------------------------------
+ */
 // Edit as required
 function tnatheme_globals() {
     global $pre_path;
@@ -18,6 +22,10 @@ function tnatheme_globals() {
 }
 // For live environment
 // tnatheme_globals();
+/**
+---------------------------------------------------------------
+---------------------------------------------------------------
+ */
 function dequeue_parent_style() {
     wp_dequeue_style('tna-styles');
     wp_deregister_style('tna-styles');
@@ -33,22 +41,29 @@ function tna_child_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'tna_child_styles' );
 
-// Change the POSTS label to searches
-function edit_admin_menus() {
-    global $menu;
-
-    $menu[5][0] = 'Recipes'; // Change Posts to Recipes
-}
-add_action( 'admin_menu', 'edit_admin_menus' );
-
+/**
+    ---------------------------------------------------------------
+    ---------------------------------------------------------------
+ */
+// Change the POSTS label to Information requests
 function edit_admin_menus() {
     global $menu;
     global $submenu;
 
-    $menu[5][0] = 'Recipes'; // Change Posts to Recipes
-    $submenu['edit.php'][5][0] = 'All Recipes';
-    $submenu['edit.php'][10][0] = 'Add a Recipe';
-    $submenu['edit.php'][15][0] = 'Meal Types'; // Rename categories to meal types
-    $submenu['edit.php'][16][0] = 'Ingredients'; // Rename tags to ingredients
+    $menu[5][0] = 'Information requests'; // Change Posts to Recipes
+    $submenu['edit.php'][5][0] = 'All information requests';
+    $submenu['edit.php'][10][0] = 'Add an information request';
 }
 add_action( 'admin_menu', 'edit_admin_menus' );
+
+function custom_theme_setup() {
+    add_theme_support( $feature, $arguments );
+}
+add_action( 'after_setup_theme', 'custom_theme_setup' );
+
+/**
+---------------------------------------------------------------
+---------------------------------------------------------------
+ */
+
+
