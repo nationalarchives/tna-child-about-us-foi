@@ -14,3 +14,8 @@ Text Domain:    tna-base
 body {
 
 }
+
+hr.line-stroke {
+    border-top: 1px solid #EFEFEF;
+    background-image: none;
+}
