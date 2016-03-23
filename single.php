@@ -2,74 +2,56 @@
 /*
     FOI details page
 */
-get_header();
-?>
-    <div class="container" id="page_wrap" role="main">
-        <?php include get_template_directory() . '/breadcrumb.php'; ?>
-        <div class="row">
-            <div class="col starts-at-full ends-at-two-thirds box clr">
-                <div class="heading-holding-banner">
-                    <h1>
-                <span>
-                    <span>
-                       <?php echo get_the_title(); ?>
-                    </span>
-                </span>
-                    </h1>
-                </div>
-                <div class="breather">
-                    <br />
-                    <?php
-                    $published_by = get_post_meta( $post->ID, 'authors_section_published-by', true );
-                    if (!empty($published_by)) {
-                        echo '<span class="entry-meta"><strong>Published in:</strong> '.$published_by.'</span>';
-                    }
-                    ?>
 
+get_header(); ?>
 
-                    <div class="clearfix"></div>
-                    <span class="entry-meta"><strong>Keywords:</strong> </span>
+<?php get_template_part('breadcrumb'); ?>
+    <div id="primary" class="content-area">
+        <div class="container">
+            <div class="row">
+                <main id="main" class="col-xs-12 col-sm-8 col-md-8" role="main">
+                    <?php while ( have_posts() ) : the_post(); ?>
+                    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                        <div class="entry-header">
+                            <h1><?php the_title(); ?></h1>
+                        </div>
+                        <div class="entry-content">
+                            <?php
+                                /* Variables */
+                                $get_foi_request_reference = get_post_meta($post->ID, 'foi_reference', true);
+                                $date_of_request = get_the_time('D F Y');
+                            ?>
+                            <figure>
+                                <figcaption>
+                                    <?php echo 'FOI request reference: '. $get_foi_request_reference; ?>
+                                </figcaption>
+                                <figcaption>
+                                    <?php echo 'Publication date: '.$date_of_request?>
+                                </figcaption>
+                            </figure>
+                            <hr class="line-stroke">
+                            <?php
 
-                    <?php
-                    //displaying custom taxonomy 'keywords'
-                    $keywords_terms = wp_get_post_terms($post->ID, 'keywords');
-                    $i = 0;
-                    foreach ( $keywords_terms as $term ) { $i++;
-                        if ( $i > 1 ) {
-                            echo ', ';
-                        }
-                        echo '<span class="entry-meta">'.$term->name.'</span>';
-                    }
-                    ?>
-
-                    <hr class="line-stroke">
-                    <div class="clearfix"></div>
-                    <?php
-                    if (have_posts()) :
-                        while (have_posts()) : the_post();
+                            /* Display content */
                             the_content();
-                        endwhile;
-                    endif;
-                    ?>
-                    <div class="clearfix"></div>
 
-                    <?php
-                    $research_pdf = get_post_meta( $post->ID, 'authors_section_pdf', true );
-                    $pdf_id = get_pdf_id($research_pdf);
-                    $file_path = filesize(get_attached_file($pdf_id));
-                    $pdf_size = $file_path;
-                    if (!empty ($research_pdf)) {
-                        echo '<a class="button float-right bottom-spacing" target="_blank" href="'.$research_pdf.'">View (PDF, '.formatSizeUnits($pdf_size).')</a>';
-                    }
-                    ?>
-
-                </div>
-                <!--  Research ends here-->
+                            ?>
+                            <?php
+                            /* Display the attachments */
+                            $research_pdf = get_post_meta( $post->ID, 'foi_pdf', true );
+                            $pdf_id = get_pdf_id($research_pdf);
+                            $file_path = filesize(get_attached_file($pdf_id));
+                            $pdf_size = $file_path;
+                            if (!empty ($research_pdf)) :?>
+                                View document: <a target="_b lank" href="<?php echo $research_pdf ?>"> (PDF, '<?php echo formatSizeUnits($pdf_size); ?>')</a>
+                            <?php endif; ?>
+                            <?php endwhile; ?>
+                        </div>
+                    </article>
+                </main>
+                <?php get_sidebar(); ?>
             </div>
-            <?php //sidebar comes here
-            get_sidebar(  );
-            ?>
         </div>
     </div>
-<?php
-get_footer();
+
+<?php get_footer(); ?>

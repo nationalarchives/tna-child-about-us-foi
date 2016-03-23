@@ -61,10 +61,20 @@ function edit_admin_menus()
 {
     global $menu;
     global $submenu;
+    global $wp_post_types;
 
     $menu[5][0] = 'Information requests'; // Change Posts to Recipes
-    $submenu['edit.php'][5][0] = 'All information requests';
-    $submenu['edit.php'][10][0] = 'Add an information request';
+    $submenu['edit.php'][5][0] = 'All requests';
+    $submenu['edit.php'][10][0] = 'Add new request';
+
+    $labels = &$wp_post_types['post']->labels;
+    $labels->name = 'Information requests';
+    $labels->singular_name = 'Requests';
+    $labels->add_new = 'Add New Request';
+    $labels->edit_item = 'Edit Requests';
+    $labels->search_items = 'Search Requests';
+    $labels->not_found = 'No Requests found';
+    $labels->not_found_in_trash = 'No Requests found in Trash';
 }
 
 add_action('admin_menu', 'edit_admin_menus');
@@ -75,6 +85,7 @@ function custom_theme_setup()
 }
 
 add_action('after_setup_theme', 'custom_theme_setup');
+
 
 
 /**

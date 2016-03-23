@@ -7,11 +7,7 @@ get_header();
 
 ?>
     <div class="foi_requests">
-        <div class="container">
-            <div class="banner" role="banner">
-                <?php get_template_part('breadcrumb'); ?>
-            </div>
-        </DIV>
+        <?php get_template_part('breadcrumb'); ?>
         <main id="main" class="content-area" role="main">
             <div class="container">
                 <div class="row">
@@ -49,16 +45,16 @@ get_header();
                                 ?>
                                 <figure>
                                     <?php
-                                        $foi_year = ""; // assign $date_old to nothing to start
-                                        $foi_month = ""; // assign $date_old to nothing to start
+                                    $foi_year = ""; // assign $date_old to nothing to start
+                                    $foi_month = ""; // assign $date_old to nothing to start
                                     ?>
                                     <?php while ( $archive_query->have_posts() ) : $archive_query->the_post(); // run the custom loop ?>
 
                                         <?php
-                                            $get_the_foi_year = get_the_time("Y"); // get $date_new in "Month Year" format
-                                            $get_the_foi_month = get_the_time("F"); // get $date_new in "Month Year" format
-                                            $get_the_foi_year_old = get_the_time("Y") -3; // get $date_new in "Month Year" format
-                                            $get_foi_request_reference = get_post_meta($post->ID, 'foi_reference', true)
+                                        $get_the_foi_year = get_the_time("Y"); // get $date_new in "Month Year" format
+                                        $get_the_foi_month = get_the_time("F"); // get $date_new in "Month Year" format
+                                        $get_the_foi_year_old = get_the_time("Y") -3; // get $date_new in "Month Year" format
+                                        $get_foi_request_reference = get_post_meta($post->ID, 'foi_reference', true)
                                         ?>
                                         <?php if ( $foi_year != $get_the_foi_year ) : // run the check on $date_old and $date_new, and output accordingly ?>
                                             <h2><?php echo $get_the_foi_year; ?></h2>
@@ -85,7 +81,7 @@ get_header();
                         </article>
                     </div>
 
-                        <?php get_sidebar(); ?>
+                    <?php get_sidebar(); ?>
 
                 </div>
             </div>
