@@ -19,3 +19,14 @@ hr.line-stroke {
     border-top: 1px solid #EFEFEF;
     background-image: none;
 }
+
+.foi_requests figure a figcaption:hover {
+    background:#eee;
+}
+.foi_requests figure a figcaption,
+.foi_requests figure h3 {
+    padding:5px 10px 5px 10px;
+}
+.foi_requests figure figcaption span {
+    color:black;
+}

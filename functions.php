@@ -91,7 +91,7 @@ class Rational_Meta_Box {
     );
     private $fields = array(
         array(
-            'id' => 'foi-reference',
+            'id' => 'reference',
             'label' => 'FOI reference number',
             'type' => 'text',
         ),
@@ -129,7 +129,7 @@ class Rational_Meta_Box {
      * Generates the HTML for the meta box
      */
     public function add_meta_box_callback( $post ) {
-        wp_nonce_field( 'foi_section_data', 'foi_section_nonce' );
+        wp_nonce_field( 'foi_request_data', 'foi_request_nonce' );
         $this->generate_fields( $post );
     }
     /**
@@ -171,7 +171,7 @@ class Rational_Meta_Box {
         $output = '';
         foreach ( $this->fields as $field ) {
             $label = '<label for="' . $field['id'] . '">' . $field['label'] . '</label>';
-            $db_value = get_post_meta( $post->ID, 'foi_section_' . $field['id'], true );
+            $db_value = get_post_meta( $post->ID, 'foi_' . $field['id'], true );
             switch ( $field['type'] ) {
                 case 'media':
                     $input = sprintf(
@@ -211,10 +211,10 @@ class Rational_Meta_Box {
      * Hooks into WordPress' save_post function
      */
     public function save_post( $post_id ) {
-        if ( ! isset( $_POST['foi_section_nonce'] ) )
+        if ( ! isset( $_POST['foi_request_nonce'] ) )
             return $post_id;
-        $nonce = $_POST['foi_section_nonce'];
-        if ( !wp_verify_nonce( $nonce, 'foi_section_data' ) )
+        $nonce = $_POST['foi_request_nonce'];
+        if ( !wp_verify_nonce( $nonce, 'foi_request_data' ) )
             return $post_id;
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
             return $post_id;
@@ -228,9 +228,9 @@ class Rational_Meta_Box {
                         $_POST[ $field['id'] ] = sanitize_text_field( $_POST[ $field['id'] ] );
                         break;
                 }
-                update_post_meta( $post_id, 'foi_section_' . $field['id'], $_POST[ $field['id'] ] );
+                update_post_meta( $post_id, 'foi_' . $field['id'], $_POST[ $field['id'] ] );
             } else if ( $field['type'] === 'checkbox' ) {
-                update_post_meta( $post_id, 'foi_section_' . $field['id'], '0' );
+                update_post_meta( $post_id, 'foi_' . $field['id'], '0' );
             }
         }
     }
@@ -302,55 +302,6 @@ function register_theme_menus () {
 }
 add_action ( 'init', 'register_theme_menus' );
 
-
-function information_requests_by_year() {
-    // array to use for results
-    $foi_year = array();
-
-    // array to use for checking today's date
-    $foi_today = getdate();
-
-    // get information requests from WP
-    $posts = get_posts(array(
-        'numberposts' => -1,
-        'post_type' => 'post',
-        'post_status' => 'publish',
-        'date_query' => array(
-            array(
-                'after' => $foi_today[ 'month' ] . ' 1st, ' . ($foi_today[ 'year' ] - 3)
-            )
-        )
-    ));
-
-    // loop through posts, populating $months arrays
-    foreach($posts as $post) {
-        $foi_year[date('Y', strtotime($post->post_date))][] = $post;
-    }
-
-
-    return $foi_year;
-}
-
-function information_requests_by_month() {
-    // array to use for results
-    $foi_month = array();
-
-    // get information requests from WP
-    $foi_posts = get_posts(array(
-        'numberposts' => -1,
-        'post_type' => 'post',
-        'post_status' => 'publish',
-    ));
-
-    // loop through posts, populating $months arrays
-    foreach($foi_posts as $post) {
-        $foi_month[date('F', strtotime($post->post_date))][] = $post;
-    }
-
-    krsort($foi_year);
-
-    return $foi_month;
-}
 
 /*
  *

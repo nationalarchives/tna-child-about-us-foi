@@ -2,11 +2,16 @@
 /*
 Template Name: FOI landing
 */
-get_header(); ?>
-    <div class="fww">
-        <div class="banner" role="banner">
-            <?php get_template_part('breadcrumb'); ?>
-        </div>
+get_header();
+
+
+?>
+    <div class="foi_requests">
+        <div class="container">
+            <div class="banner" role="banner">
+                <?php get_template_part('breadcrumb'); ?>
+            </div>
+        </DIV>
         <main id="main" class="content-area" role="main">
             <div class="container">
                 <div class="row">
@@ -28,29 +33,60 @@ get_header(); ?>
                                 <?php else : ?>
                                     <!-- posts not found info -->
                                 <?php endif; ?>
-                                <?php foreach(information_requests_by_year() as $foi_year => $posts) : ?>
-                                        <h2><?php echo  $foi_year; ?></h2>
-                                        <?php foreach($posts as $post) : setup_postdata($post); ?>
-                                            <?php $foi_reference = get_post_meta( $post->ID, 'foi-reference', true ); ?>
-                                            <figure>
-                                                <figcaption>
-                                                   <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                                                </figcaption>
-                                                <figcaption>
-                                                    <?php if (isset($foi_reference)) :?>
-                                                        <p>FOI reference: <?php echo $foi_reference ?> </p>
-                                                    <?php endif; ?>
-                                                </figcaption>
-                                                <hr class="line-stroke">
-                                            </figure>
-                                        <?php endforeach; ?>
-                                <?php endforeach; ?>
+                                <?php
+                                // array to use for checking today's date
+                                $foi_today = getdate() ;
+
+                                // get information requests from WP
+                                $posts = get_posts(array(
+                                    'numberposts' => -1,
+                                    'post_type' => 'post',
+                                ));
+
+                                // new instance of WP_Quert
+                                $archive_query = new WP_Query( $posts );
+
+                                ?>
+                                <figure>
+                                    <?php
+                                        $foi_year = ""; // assign $date_old to nothing to start
+                                        $foi_month = ""; // assign $date_old to nothing to start
+                                    ?>
+                                    <?php while ( $archive_query->have_posts() ) : $archive_query->the_post(); // run the custom loop ?>
+
+                                        <?php
+                                            $get_the_foi_year = get_the_time("Y"); // get $date_new in "Month Year" format
+                                            $get_the_foi_month = get_the_time("F"); // get $date_new in "Month Year" format
+                                            $get_the_foi_year_old = get_the_time("Y") -3; // get $date_new in "Month Year" format
+                                            $get_foi_request_reference = get_post_meta($post->ID, 'foi_reference', true)
+                                        ?>
+                                        <?php if ( $foi_year != $get_the_foi_year ) : // run the check on $date_old and $date_new, and output accordingly ?>
+                                            <h2><?php echo $get_the_foi_year; ?></h2>
+                                            <hr class="line-stroke">
+                                        <?php endif; ?>
+
+                                        <?php if ( $foi_month != $get_the_foi_month ) : // run the check on $date_old and $date_new, and output accordingly ?>
+                                            <h3><?php echo $get_the_foi_month; ?></h3>
+                                        <?php endif; ?>
+                                        <a href="<?php echo get_permalink(); ?>">
+                                            <figcaption>
+                                                <?php the_title(); ?>
+                                                <?php echo '<br /><span>FOI request reference: '.$get_foi_request_reference.'</span>' ?>
+                                            </figcaption>
+                                        </a>
+                                        <?php $foi_month = $get_the_foi_month; // update $date_old ?>
+                                        <?php $foi_year = $get_the_foi_year; // update $date_old ?>
+
+
+                                    <?php endwhile; // end the custom loop ?>
+                                </figure>
+                                <?php wp_reset_postdata(); // always reset post data after a custom query ?>
                             </div>
                         </article>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        s
-                    </div>
+
+                        <?php get_sidebar(); ?>
+
                 </div>
             </div>
         </main>

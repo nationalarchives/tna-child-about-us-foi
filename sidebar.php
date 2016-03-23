@@ -4,18 +4,20 @@ $defaults = array(
     'menu'            => 'Sidebar Menu',
     'container'       => 'div',
     'container_class' => 'breather',
-    'items_wrap'      => '<ul class="sibling">%3$s</ul>',
-);
+    'items_wrap'      => '<ul class="sibling">%3$s</ul>', );
 ?>
-<div class="col starts-at-full ends-at-one-third clr box">
-    <div class="heading-holding-banner">
+
+<aside id="sidebar" class="col-xs-12 col-sm-4 col-md-4" role="complementary">
+    <div class="sidebar-header">
         <h2>
-           <span>
-              <span>
-                 Also in Research and scholarship
-              </span>
-           </span>
+            <a name="inThisSection" href="<?php echo make_path_relative( get_permalink($parent_page_id) ); ?>">
+                Also in <?php echo get_the_title($parent_page_id);?>
+            </a>
         </h2>
     </div>
-    <?php wp_nav_menu( $defaults ); ?>
-</div>
+    <div class="sidebar-nav clearfix">
+        <ul class="sibling">
+            <?php wp_nav_menu( $defaults ); ?>
+        </ul>
+    </div>
+</aside>
