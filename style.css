@@ -20,13 +20,17 @@ hr.line-stroke {
     background-image: none;
 }
 
-.foi_requests figure a figcaption:hover {
+.foi_requests section a div:hover {
     background:#eee;
 }
-.foi_requests figure a figcaption,
-.foi_requests figure h3 {
+.foi_requests section a div {
+    width:100%;
+
+}
+.foi_requests section a div,
+.foi_requests section h3 {
     padding:5px 10px 5px 10px;
 }
-.foi_requests figure figcaption span {
+.foi_requests section div span {
     color:black;
 }
