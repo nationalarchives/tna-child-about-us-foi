@@ -36,15 +36,6 @@ get_header(); ?>
                             the_content();
 
                             ?>
-                            <?php
-                            /* Display the attachments */
-                            $research_pdf = get_post_meta( $post->ID, 'foi_pdf', true );
-                            $pdf_id = get_pdf_id($research_pdf);
-                            $file_path = filesize(get_attached_file($pdf_id));
-                            $pdf_size = $file_path;
-                            if (!empty ($research_pdf)) :?>
-                                View document: <a target="_b lank" href="<?php echo $research_pdf ?>"> (PDF, '<?php echo formatSizeUnits($pdf_size); ?>')</a>
-                            <?php endif; ?>
                             <?php endwhile; ?>
                         </div>
                     </article>

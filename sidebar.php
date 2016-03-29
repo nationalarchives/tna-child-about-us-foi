@@ -2,8 +2,6 @@
 $defaults = array(
     'theme_location'  => 'sidebar-menu',
     'menu'            => 'Sidebar Menu',
-    'container'       => 'div',
-    'container_class' => 'breather',
     'items_wrap'      => '<ul class="sibling">%3$s</ul>', );
 ?>
 
@@ -16,8 +14,6 @@ $defaults = array(
         </h2>
     </div>
     <div class="sidebar-nav clearfix">
-        <ul class="sibling">
-            <?php wp_nav_menu( $defaults ); ?>
-        </ul>
+        <?php wp_nav_menu( $defaults ); ?>
     </div>
 </aside>

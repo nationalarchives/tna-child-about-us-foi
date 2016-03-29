@@ -276,7 +276,7 @@ add_action('admin_menu','remove_page_metaboxes');
  *
  */
 // retrieves the attachment ID from the file URL
-function get_pdf_id($pdf_url) {
+/*function get_pdf_id($pdf_url) {
     global $wpdb;
     $attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $pdf_url ));
     return $attachment[0];
@@ -295,7 +295,7 @@ function formatSizeUnits($pdf_size) {
         $pdf_size = '0 bytes';
     }
     return $pdf_size;
-}
+}*/
 /*
  *
  * ================================================
