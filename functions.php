@@ -11,19 +11,19 @@ function tnatheme_globals()
     if (substr($_SERVER['REMOTE_ADDR'], 0, 3) === '10.') {
         $pre_path = '';
         $pre_crumbs = array(
-            'FOI' => '/'
+				'Freedom of information' => '/'
         );
     } else {
         $pre_crumbs = array(
             'About us' => '/about/',
-            'FOI' => '/about/foi/'
+				'Freedom of information' => '/about/freedom-of-information/'
         );
-        $pre_path = '/about/foi';
+		$pre_path = '/about/freedom-of-information';
     }
 }
 
 // For live environment
-// tnatheme_globals();
+tnatheme_globals();
 /**
  * ---------------------------------------------------------------
  * ---------------------------------------------------------------
