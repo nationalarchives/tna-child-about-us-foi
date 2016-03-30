@@ -106,11 +106,11 @@ class Rational_Meta_Box {
             'label' => 'FOI reference number',
             'type' => 'text',
         ),
-        array(
+        /*array(
             'id' => 'pdf',
             'label' => 'PDF',
             'type' => 'media',
-        )
+        )*/
     );
     /**
      * Class construct method. Adds actions to their respective WordPress hooks.
