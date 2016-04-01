@@ -7,6 +7,7 @@
 function tnatheme_globals()
 {
     global $pre_path;
+    global $pre_crumbs_post;
     global $pre_crumbs;
     if (substr($_SERVER['REMOTE_ADDR'], 0, 3) === '10.') {
         $pre_path = '';
@@ -19,7 +20,9 @@ function tnatheme_globals()
 				'Freedom of information' => '/about/freedom-of-information/'
         );
 		$pre_path = '/about/freedom-of-information';
+        $pre_crumbs_post = ' <span class="sep">&gt;</span> <span><a href="/about/freedom-of-information/information-requests">Information requests</a></span>';
     }
+
 }
 
 // For live environment
