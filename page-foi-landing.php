@@ -58,7 +58,7 @@ get_header();
                                                 <?php if ($foi_month != $get_the_foi_month) : // run the check on $date_old and $date_new, and output accordingly ?>
                                                     <h3><?php echo $get_the_foi_month; ?></h3>
                                                 <?php endif; ?>
-                                                <a href="<?php echo get_permalink(); ?>">
+                                                <a href="<?php echo make_path_relative(get_permalink()); ?>">
                                                     <div>
                                                         <?php the_title(); ?>
                                                         <?php echo '<br /><span>FOI request reference: ' . $get_foi_request_reference . '</span>' ?>

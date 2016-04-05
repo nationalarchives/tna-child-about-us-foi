@@ -7,23 +7,26 @@
 function tnatheme_globals()
 {
     global $pre_path;
+    global $pre_crumbs_post;
     global $pre_crumbs;
     if (substr($_SERVER['REMOTE_ADDR'], 0, 3) === '10.') {
         $pre_path = '';
         $pre_crumbs = array(
-            'FOI' => '/'
+				'Freedom of information' => '/'
         );
     } else {
         $pre_crumbs = array(
             'About us' => '/about/',
-            'FOI' => '/about/foi/'
+				'Freedom of information' => '/about/freedom-of-information/'
         );
-        $pre_path = '/about/foi';
+		$pre_path = '/about/freedom-of-information';
+        $pre_crumbs_post = ' <span class="sep">&gt;</span> <span><a href="/about/freedom-of-information/information-requests">Information requests</a></span>';
     }
+
 }
 
 // For live environment
-// tnatheme_globals();
+tnatheme_globals();
 /**
  * ---------------------------------------------------------------
  * ---------------------------------------------------------------
@@ -106,11 +109,6 @@ class Rational_Meta_Box {
             'label' => 'FOI reference number',
             'type' => 'text',
         ),
-        /*array(
-            'id' => 'pdf',
-            'label' => 'PDF',
-            'type' => 'media',
-        )*/
     );
     /**
      * Class construct method. Adds actions to their respective WordPress hooks.
@@ -268,34 +266,6 @@ if (!function_exists('remove_page_metaboxes')) {
     }
 }
 add_action('admin_menu','remove_page_metaboxes');
-/*
- *
- * ================================================
- *             Get PDF file size
- * ================================================
- *
- */
-// retrieves the attachment ID from the file URL
-/*function get_pdf_id($pdf_url) {
-    global $wpdb;
-    $attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $pdf_url ));
-    return $attachment[0];
-}
-//Size conversion
-function formatSizeUnits($pdf_size) {
-    if ($pdf_size >= 1048576) {
-        $pdf_size = number_format($pdf_size / 1048576, 2) . ' MB';
-    } elseif ($pdf_size >= 1024) {
-        $pdf_size = number_format($pdf_size / 1024, 2) . ' KB';
-    } elseif ($pdf_size > 1) {
-        $pdf_size = $pdf_size . ' bytes';
-    } elseif ($pdf_size == 1) {
-        $pdf_size = $pdf_size . ' byte';
-    } else {
-        $pdf_size = '0 bytes';
-    }
-    return $pdf_size;
-}*/
 /*
  *
  * ================================================
