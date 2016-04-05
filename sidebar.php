@@ -13,7 +13,7 @@ $sidebar_title = array_slice($pre_crumbs, -1);
 <aside id="sidebar" class="col-xs-12 col-sm-4 col-md-4" role="complementary">
     <div class="sidebar-header">
         <h2>
-            <a name="inThisSection" href="<?php echo next($pre_crumbs) ?>">
+            <a name="inThisSection" href="<?php echo end($pre_crumbs) ?>">
                 Also in <?php echo key($sidebar_title); ?>
             </a>
         </h2>
