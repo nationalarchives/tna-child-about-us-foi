@@ -19,7 +19,7 @@ get_header(); ?>
                             <?php
                                 /* Variables */
                                 $get_foi_request_reference = get_post_meta($post->ID, 'foi_reference', true);
-                                $date_of_request = get_the_time('l d F Y');
+                                $date_of_request = get_the_time('F Y');
                             ?>
                             <figure>
                                 <figcaption>
