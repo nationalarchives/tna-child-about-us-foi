@@ -23,6 +23,8 @@ $sidebar_title = array_slice($pre_crumbs, -1);
         <?php 
         	$arrmenu = wp_get_nav_menu_items('Sidebar Menu'); 
         	foreach($arrmenu as $menuitem):?>
+        		<?php
+        			if ((int)$menuitem->object_id !== $post->ID):?>
 				<li id="menu-item-<?php echo $menuitem->ID;?>" class="menu-item ">
         		<?php 
         		if ($menuitem->type !== "custom"):?>
@@ -32,7 +34,9 @@ $sidebar_title = array_slice($pre_crumbs, -1);
         			<a href="<?php echo $menuitem->url;?>">
         		<?php 
         		endif;?>
-       			<?php echo $menuitem->title;?></a></li>
+       			<?php echo $menuitem->title; ?></a></li>
+    			<?php
+    				endif;?>
         		<?php
         	endforeach;
          ?>
