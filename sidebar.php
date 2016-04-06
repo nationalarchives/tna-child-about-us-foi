@@ -19,6 +19,27 @@ $sidebar_title = array_slice($pre_crumbs, -1);
         </h2>
     </div>
     <div class="sidebar-nav clearfix">
-        <?php wp_nav_menu($defaults); ?>
+    	<ul class="sibling">
+        <?php 
+        	$arrmenu = wp_get_nav_menu_items('Sidebar Menu'); 
+        	foreach($arrmenu as $menuitem):?>
+        		<?php
+        			if ((int)$menuitem->object_id !== $post->ID):?>
+				<li id="menu-item-<?php echo $menuitem->ID;?>" class="menu-item ">
+        		<?php 
+        		if ($menuitem->type !== "custom"):?>
+        			<a href="<?php echo make_path_relative($menuitem->url);?>">
+        		<?php
+        		else:?>
+        			<a href="<?php echo $menuitem->url;?>">
+        		<?php 
+        		endif;?>
+       			<?php echo $menuitem->title; ?></a></li>
+    			<?php
+    				endif;?>
+        		<?php
+        	endforeach;
+         ?>
+        </ul>
     </div>
 </aside>
