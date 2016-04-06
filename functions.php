@@ -20,7 +20,7 @@ function tnatheme_globals()
 				'Freedom of Information' => '/about/freedom-of-information/'
         );
 		$pre_path = '/about/freedom-of-information';
-        $pre_crumbs_post = ' <span class="sep">&gt;</span> <span><a href="/about/freedom-of-information/information-requests">Information requests</a></span>';
+        $pre_crumbs_post = ' <span class="sep">&gt;</span> <span><a href="/about/freedom-of-information/information-requests/">Information requests</a></span>';
     }
 
 }
