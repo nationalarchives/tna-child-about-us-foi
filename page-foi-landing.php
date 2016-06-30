@@ -16,7 +16,7 @@ get_header();
                             <?php
                             /** The first loop */
                             if (have_posts()) : while (have_posts())  the_post() ?>
-                                <div class="entry-header"><h2><?php echo get_the_title() ?></h2></div>
+                                <div class="entry-header"><h1><?php echo get_the_title() ?></h1></div>
                                 <div class="entry-content">
                                     <?php echo the_content() ?>
                                     <?php wp_reset_postdata(); ?>
