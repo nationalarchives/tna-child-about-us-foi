@@ -4,25 +4,29 @@
  * ---------------------------------------------------------------
  */
 // Edit as required
-function tnatheme_globals()
-{
+function tnatheme_globals() {
     global $pre_path;
-    global $pre_crumbs_post;
     global $pre_crumbs;
-    if (substr($_SERVER['REMOTE_ADDR'], 0, 3) === '10.') {
+    if (isset($_SERVER['HTTP_X_NGINX_PROXY'])) {
+        $pre_crumbs = array(
+            'About us' => '/about/',
+            'Freedom of Information' => '/about/freedom-of-information/'
+        );
+        $pre_path = '/about/freedom-of-information';
+        $pre_crumbs_post = ' <span class="sep">&gt;</span> <span><a href="/about/freedom-of-information/information-requests/">Information requests</a></span>';
+    } elseif (substr($_SERVER['REMOTE_ADDR'], 0, 3) === '10.') {
         $pre_path = '';
         $pre_crumbs = array(
-				'Freedom of Information' => '/'
+            'Freedom of Information' => '/'
         );
     } else {
         $pre_crumbs = array(
             'About us' => '/about/',
-				'Freedom of Information' => '/about/freedom-of-information/'
+            'Freedom of Information' => '/about/freedom-of-information/'
         );
-		$pre_path = '/about/freedom-of-information';
+        $pre_path = '/about/freedom-of-information';
         $pre_crumbs_post = ' <span class="sep">&gt;</span> <span><a href="/about/freedom-of-information/information-requests/">Information requests</a></span>';
     }
-
 }
 
 // For live environment
