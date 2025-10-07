@@ -87,13 +87,14 @@ function edit_admin_menus()
 
 add_action('admin_menu', 'edit_admin_menus');
 
+/*
 function custom_theme_setup()
 {
     add_theme_support($feature, $arguments);
 }
 
 add_action('after_setup_theme', 'custom_theme_setup');
-
+*/
 
 
 /**
